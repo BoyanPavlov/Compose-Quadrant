@@ -48,54 +48,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-
-@Composable
-fun ParagraphFilled(
-    title: String,
-    text: String,
-    color: Color,
-    modifier: Modifier
-) {
-    Column(
-        modifier = Modifier
-            .background(color)
-            .fillMaxWidth(0.5f)
-            .fillMaxHeight(0.5f)
-            .padding(16.dp)
-            .then(modifier),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        val gradientColors = listOf(Cyan, Blue, Magenta /*...*/)
-        val offset = Offset(5.0f, 10.0f)
-        Text(
-            text = title,
-            style = TextStyle(
-                brush = Brush.linearGradient(
-                    colors = gradientColors
-                )
-            ),
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier
-                .padding(4.dp)
-        )
-
-        Text(
-            text = text,
-            style = TextStyle(
-                shadow = Shadow(
-                    color = Color.Black,
-                    offset = offset,
-                    blurRadius = 7f
-                )
-            ),
-            textAlign = TextAlign.Justify,
-            modifier = Modifier
-                .padding(4.dp)
-        )
-    }
-}
-
 @Composable
 fun extractValues(): List<Paragraph> {
     val titleTopLeft = "Text composable"
@@ -153,11 +105,8 @@ fun Page(paragraphs: List<Paragraph>,modifier: Modifier=Modifier) {
             .fillMaxSize()
     ) {
         for (index in paragraphs.indices) {
-            ParagraphFilled(
-                title = paragraphs[index].title,
-                text = paragraphs[index].text,
-                color = paragraphs[index].color,
-                modifier = Modifier.align(
+            paragraphs[index].ParagraphFilled(modifier =
+            Modifier.align(
                     alignment =
                     when (index) {
                         0 -> Alignment.TopStart
